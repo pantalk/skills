@@ -1,5 +1,5 @@
 ---
-name: list-bots
+name: pantalk-list-bots
 description: List all configured bots and their status across connected chat platforms.
 ---
 
@@ -7,33 +7,26 @@ Use this skill when your agent needs to discover which bots are available, what 
 
 ## Prerequisites
 
-- `pantalkd` must be running with at least one service configured.
+- `pantalkd` must be running with at least one bot configured.
 
 ## List All Bots
 
 ```bash
-pantalk-slack bots --json
+pantalk bots
 ```
 
-This returns all bots registered for the specified service. To check bots across all services:
-
-```bash
-pantalk-slack bots --json
-pantalk-discord bots --json
-pantalk-mattermost bots --json
-pantalk-telegram bots --json
-```
+This returns all configured bots. JSON output is automatic when called by an agent (non-TTY stdout).
 
 ## Output Structure
 
 Each bot entry contains:
 
-| Field          | Description                          |
-| -------------- | ------------------------------------ |
-| `service`      | Platform name (slack, discord, etc.) |
-| `name`         | Bot name as defined in config        |
-| `bot_id`       | Platform-specific bot identifier     |
-| `display_name` | Human-readable bot display name      |
+| Field          | Description                                   |
+| -------------- | --------------------------------------------- |
+| `service`      | Bot type / platform (slack, discord, etc.)    |
+| `name`         | Bot name as defined in config                 |
+| `bot_id`       | Platform user ID (auto-discovered at runtime) |
+| `display_name` | Human-readable bot display name               |
 
 ## Example Output
 
@@ -57,6 +50,6 @@ Each bot entry contains:
 ## When to Use
 
 - Discovering available bots before sending a message
-- Verifying that a service is connected and bots are registered
+- Verifying that bots are connected and registered
 - Building routing logic based on available bot identifiers
 - Health-checking the pantalkd setup
