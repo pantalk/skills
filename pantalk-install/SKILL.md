@@ -92,18 +92,14 @@ EOF
 
 Add more bots (discord, mattermost, telegram) as needed. Each bot specifies its own `type`. See the full example config at `configs/pantalk.example.yaml`.
 
-### Slack App Setup
+### Platform Setup Guides
 
-Before Pantalk can connect to Slack, your Slack app must be configured correctly:
+Each platform requires its own app/bot setup before Pantalk can connect. See the detailed guides:
 
-1. **Enable Socket Mode** - Settings → Socket Mode → toggle ON
-2. **Generate App-Level Token** - Settings → Basic Information → App-Level Tokens → Generate with `connections:write` scope → copy the `xapp-...` token
-3. **Add Bot Scopes** - Features → OAuth & Permissions → Bot Token Scopes → add: `chat:write`, `channels:history`, `app_mentions:read` (and optionally `groups:history`, `im:history`)
-4. **Subscribe to Events** - Features → Event Subscriptions → toggle ON → Subscribe to bot events → add: `app_mention`, `message.channels` (and optionally `message.groups`, `message.im`) → **Save Changes**
-5. **Install/Reinstall App** - Features → OAuth & Permissions → Install to Workspace → copy the `xoxb-...` Bot User OAuth Token
-6. **Invite Bot to Channel** - In Slack, type `/invite @YourBotName` in the channel
-
-> **Important:** You must reinstall the app after changing scopes or event subscriptions.
+- [Slack Setup](https://github.com/pantalk/pantalk/blob/master/docs/slack-setup.md) — Create a Slack app with Socket Mode, scopes, and event subscriptions
+- [Discord Setup](https://github.com/pantalk/pantalk/blob/master/docs/discord-setup.md) — Create a Discord application with Gateway intents
+- [Mattermost Setup](https://github.com/pantalk/pantalk/blob/master/docs/mattermost-setup.md) — Create a bot account with endpoint configuration
+- [Telegram Setup](https://github.com/pantalk/pantalk/blob/master/docs/telegram-setup.md) — Create a bot via BotFather
 
 ### Required Environment Variables
 
