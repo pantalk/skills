@@ -1,0 +1,67 @@
+---
+name: read-history
+description: Read conversation history from any channel or thread to build context for agent reasoning.
+---
+
+Use this skill when your agent needs to read previous messages in a channel or thread to understand context before responding or taking action.
+
+## Prerequisites
+
+- `pantalkd` must be running with at least one service configured.
+- History is stored in SQLite and persists across process restarts.
+
+## Fetch Channel History
+
+```bash
+pantalk-slack history --bot <bot-name> --channel <channel-id> --json
+```
+
+### Common Options
+
+| Flag        | Description                                        |
+| ----------- | -------------------------------------------------- |
+| `--bot`     | Bot name from config (optional, filters by bot)    |
+| `--channel` | Channel to read history from                       |
+| `--thread`  | Thread to read history from                        |
+| `--target`  | Generic target filter                              |
+| `--limit`   | Number of events to return (default: 20)           |
+| `--since`   | Only return events with ID greater than this value |
+| `--notify`  | Only return notification-worthy events             |
+| `--json`    | Output as JSON for structured parsing              |
+
+## Examples
+
+### Read Recent Channel Messages
+
+```bash
+pantalk-slack history --bot ops-bot --channel C0123ABCD --limit 30 --json
+```
+
+### Read a Full Thread
+
+```bash
+pantalk-discord history --bot support-bot --thread 1234567890 --limit 100 --json
+```
+
+### Incremental Reads
+
+Track the last seen event ID and only fetch new messages:
+
+```bash
+pantalk-slack history --bot ops-bot --channel C0123ABCD --since 150 --json
+```
+
+### Notification-Only History
+
+Filter to only events that are relevant to the agent (mentions, DMs):
+
+```bash
+pantalk-slack history --bot ops-bot --notify --json
+```
+
+## When to Use
+
+- Reading conversation context before composing a reply
+- Summarizing a thread for escalation or handoff
+- Checking if a question was already answered
+- Building memory for multi-turn agent conversations
