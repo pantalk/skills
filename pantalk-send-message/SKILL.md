@@ -1,6 +1,6 @@
 ---
 name: pantalk-send-message
-description: Send a message to a chat channel or thread via any connected platform (Slack, Discord, Mattermost, Telegram).
+description: Send a message to a chat channel or thread via any connected platform (Slack, Discord, Mattermost, Telegram, WhatsApp).
 ---
 
 Use this skill when you need to send a message to a specific channel, thread, or user on any chat platform connected through pantalkd.
