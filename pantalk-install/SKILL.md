@@ -1,6 +1,6 @@
 ---
 name: pantalk-install
-description: Install, configure, and start the Pantalk daemon so your agent can communicate across Slack, Discord, Mattermost, and Telegram.
+description: Install, configure, and start the Pantalk daemon so your agent can communicate across Slack, Discord, Mattermost, Telegram, and WhatsApp.
 ---
 
 Use this skill to install Pantalk from pre-built binaries, create a configuration file, and start the daemon. After completing these steps your agent will have access to all Pantalk skills (send messages, read history, stream events, etc.).
