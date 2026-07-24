@@ -96,10 +96,10 @@ Add more bots (discord, mattermost, telegram) as needed. Each bot specifies its 
 
 Each platform requires its own app/bot setup before Pantalk can connect. See the detailed guides:
 
-- [Slack Setup](https://github.com/pantalk/pantalk/blob/master/docs/slack-setup.md) - Create a Slack app with Socket Mode, scopes, and event subscriptions
-- [Discord Setup](https://github.com/pantalk/pantalk/blob/master/docs/discord-setup.md) - Create a Discord application with Gateway intents
-- [Mattermost Setup](https://github.com/pantalk/pantalk/blob/master/docs/mattermost-setup.md) - Create a bot account with endpoint configuration
-- [Telegram Setup](https://github.com/pantalk/pantalk/blob/master/docs/telegram-setup.md) - Create a bot via BotFather
+- [Slack Setup](https://github.com/pantalk/pantalk/blob/main/docs/slack-setup.md) - Create a Slack app with Socket Mode, scopes, and event subscriptions
+- [Discord Setup](https://github.com/pantalk/pantalk/blob/main/docs/discord-setup.md) - Create a Discord application with Gateway intents
+- [Mattermost Setup](https://github.com/pantalk/pantalk/blob/main/docs/mattermost-setup.md) - Create a bot account with endpoint configuration
+- [Telegram Setup](https://github.com/pantalk/pantalk/blob/main/docs/telegram-setup.md) - Create a bot via BotFather
 
 ### Required Environment Variables
 

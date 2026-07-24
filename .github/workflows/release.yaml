@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  # Dispatched by tag-release.yaml because tags pushed with GITHUB_TOKEN do not
+  # trigger another workflow.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate tag
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          VERSION="$(tr -d '[:space:]' < VERSION)"
+          if [[ "$GITHUB_REF_NAME" != "v${VERSION}" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match VERSION v${VERSION}" >&2
+            exit 1
+          fi
+
+      - name: Package skills
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          mkdir -p dist
+
+          zip -r "dist/pantalk-skills-${VERSION}.zip" pantalk-*/ -x '*/.*'
+          cp "dist/pantalk-skills-${VERSION}.zip" "dist/pantalk-skills.zip"
+          (cd dist && sha256sum pantalk-skills*.zip > checksums.txt)
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: |
+            dist/*.zip
+            dist/checksums.txt

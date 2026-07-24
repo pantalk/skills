@@ -34,6 +34,18 @@ JSON output is automatic when called by an agent (non-TTY stdout).
 | `--all`     | Allow broad clear across all bots/channels              |
 | `--json`    | Force JSON output (auto when non-TTY)                   |
 
+## Attachments in History
+
+Messages that carried files include an `attachments` array in JSON output, with a local `path` where the daemon stored the bytes:
+
+```json
+{"text": "see the graph", "attachments": [{"name": "latency.png", "mime": "image/png", "size": 20481, "path": "/home/user/.local/share/pantalk/media/9f/9f86d0...png"}]}
+```
+
+Read the file at `path` directly (e.g. to inspect an image or parse a document). An empty `path` means the bytes were not stored - only metadata was recorded.
+
+A message that arrived with files but no text shows a synthetic placeholder as its `text`, e.g. `[attachment: photo.jpg]`. This placeholder is generated at query time - it is how you spot file-only messages in a listing, and it is not text the sender typed.
+
 ## Examples
 
 ### Read Recent Channel Messages

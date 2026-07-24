@@ -76,10 +76,13 @@ Each notification event contains:
 | `channel`         | Channel identifier                               |
 | `thread`          | Thread identifier (if threaded)                  |
 | `text`            | Message content                                  |
+| `attachments`     | Files carried by the message (name, mime, size, local `path` to read the bytes) |
 | `mentions_agent`  | Whether the agent was explicitly mentioned       |
 | `direct_to_agent` | Whether this is a direct message                 |
 | `notify`          | Whether the event triggered a notification       |
 | `seen`            | Whether the notification has been marked as seen |
+
+> **Note:** a message that arrived with files but no text shows a synthetic `text` placeholder like `[attachment: photo.jpg]`, generated at query time. Read the file via the attachment's `path` when you need the actual content.
 
 ## When to Use
 
