@@ -1,9 +1,9 @@
 ---
 name: pantalk-status
-description: Check the health and runtime state of the pantalkd daemon — uptime, connected bots, and configured agent runners.
+description: Check the health and runtime state of the pantalkd daemon - uptime, connected bots, configured agent runners, and notification backlog.
 ---
 
-Use this skill to verify that `pantalkd` is running and healthy before sending messages or reading notifications. It returns uptime, a list of connected bots, and any configured agent definitions.
+Use this skill to verify that `pantalkd` is running and healthy before sending messages or reading notifications. It returns uptime, a list of connected bots, configured agent definitions, and notification backlog counts.
 
 ## Prerequisites
 
@@ -25,6 +25,7 @@ bots:    2
   alerts-bot            telegram
 agents:  1
   responder             when: direct || mentions
+notifications: total=42 unseen=7
 ```
 
 ## JSON Output
@@ -43,20 +44,23 @@ pantalk status --json
   "uptime_sec": 9240,
   "bots": [
     { "name": "ops-bot", "service": "slack", "display_name": "Ops Bot" },
-    { "name": "alerts-bot", "service": "telegram", "display_name": "Alerts Bot" }
+    {
+      "name": "alerts-bot",
+      "service": "telegram",
+      "display_name": "Alerts Bot"
+    }
   ],
-  "agents": [
-    { "name": "responder", "when": "direct || mentions" }
-  ]
+  "agents": [{ "name": "responder", "when": "direct || mentions" }],
+  "notifications": { "total": 42, "unseen": 7 }
 }
 ```
 
 ## Flags
 
-| Flag       | Description                                             |
-| ---------- | ------------------------------------------------------- |
-| `--socket` | Path to the daemon socket (default: auto-detected)      |
-| `--json`   | Force JSON output (automatic when stdout is not a TTY)  |
+| Flag       | Description                                            |
+| ---------- | ------------------------------------------------------ |
+| `--socket` | Path to the daemon socket (default: auto-detected)     |
+| `--json`   | Force JSON output (automatic when stdout is not a TTY) |
 
 ## When to Use
 

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - next
+  pull_request:
+    branches:
+      - main
+      - next
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate skills
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t skills < <(find . -mindepth 2 -maxdepth 2 -type f -name SKILL.md | sort)
+          if [[ ${#skills[@]} -eq 0 ]]; then
+            echo "No skills found" >&2
+            exit 1
+          fi
+
+          for file in "${skills[@]}"; do
+            expected="$(basename "$(dirname "$file")")"
+            if ! grep -q "^name: ${expected}$" "$file"; then
+              echo "$file does not declare name: $expected" >&2
+              exit 1
+            fi
+            if ! grep -q '^description: .\+' "$file"; then
+              echo "$file does not declare a description" >&2
+              exit 1
+            fi
+          done
+
+          echo "Validated ${#skills[@]} skills"

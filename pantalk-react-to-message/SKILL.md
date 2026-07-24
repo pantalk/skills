@@ -3,7 +3,7 @@ name: pantalk-react-to-message
 description: Add an emoji reaction to a chat message via any connected platform (Slack, Discord).
 ---
 
-Use this skill when your agent needs to acknowledge a message with an emoji reaction — a lightweight alternative to sending a full reply. Reactions are ideal for signalling acknowledgement, approval, or status without flooding a channel with text responses.
+Use this skill when your agent needs to acknowledge a message with an emoji reaction - a lightweight alternative to sending a full reply. Reactions are ideal for signalling acknowledgement, approval, or status without flooding a channel with text responses.
 
 ## Prerequisites
 
@@ -21,10 +21,10 @@ JSON output is automatic when called by an agent (non-TTY stdout). The command p
 
 ### Platform-Specific Requirements
 
-| Platform | Required flags            | Emoji format                                    |
-| -------- | ------------------------- | ----------------------------------------------- |
-| Slack    | `--channel`, `--thread`   | Name without colons: `white_check_mark`, `eyes` |
-| Discord  | `--channel`, `--target`   | Unicode character `✅` or `name:id` for custom  |
+| Platform | Required flags          | Emoji format                                    |
+| -------- | ----------------------- | ----------------------------------------------- |
+| Slack    | `--channel`, `--thread` | Name without colons: `white_check_mark`, `eyes` |
+| Discord  | `--channel`, `--target` | Unicode character `✅` or `name:id` for custom  |
 
 On Slack the `--thread` flag holds the message timestamp (e.g. `1700000000.123456`), which is the same value as the `thread` field in history/notification events.
 
@@ -81,11 +81,11 @@ done
 
 Use these fields from `pantalk notifications --json` output to build the react command:
 
-| Event field | React flag  | Notes                                  |
-| ----------- | ----------- | -------------------------------------- |
-| `channel`   | `--channel` | Channel ID (all platforms)             |
-| `thread`    | `--thread`  | Message timestamp (Slack)              |
-| `target`    | `--target`  | Message ID (Discord, generic)          |
+| Event field | React flag  | Notes                         |
+| ----------- | ----------- | ----------------------------- |
+| `channel`   | `--channel` | Channel ID (all platforms)    |
+| `thread`    | `--thread`  | Message timestamp (Slack)     |
+| `target`    | `--target`  | Message ID (Discord, generic) |
 
 ## Error Handling
 
