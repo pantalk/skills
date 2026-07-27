@@ -12,16 +12,25 @@
 
 ## Overview
 
-Each skill is a standalone `SKILL.md` file that documents a single Pantalk capability - what it does, how to invoke it, and when to use it. Claude Code, Codex, Copilot, Gemini CLI, Goose, OpenCode, Aider, and any other tool-use framework can consume these files to understand what actions are available.
+Each skill is a standalone `SKILL.md` file that documents a single Pantalk
+capability - what it does, how to invoke it, and when to use it. Claude Code,
+Codex, Kimi Code, Zot, Copilot, Gemini CLI, Goose, OpenCode, Aider, and any
+other tool-use framework can consume these files to understand what actions are
+available.
 
-No skill mentions a messaging platform. That is deliberate: the same skill definitions work whether the conversation is happening in Slack, on WhatsApp, over SMS, or in an IRC channel, and they keep working when you swap the harness reading them.
+The skills are transport-neutral wherever the capability is shared. They work
+unchanged whether the conversation is happening in Slack, on WhatsApp, over
+SMS, or in an IRC channel. A skill names platforms only when support genuinely
+differs, such as reactions currently being available on Slack and Discord.
 
 ## Available Skills
 
 | Skill                                                             | Description                                                    |
 | ----------------------------------------------------------------- | -------------------------------------------------------------- |
 | [pantalk-install](pantalk-install/SKILL.md)                       | Install, configure, and start the Pantalk daemon               |
+| [pantalk-status](pantalk-status/SKILL.md)                         | Check daemon health and connected bot status                   |
 | [pantalk-send-message](pantalk-send-message/SKILL.md)             | Send messages to any channel or thread across all platforms    |
+| [pantalk-react-to-message](pantalk-react-to-message/SKILL.md)     | Add an emoji reaction where the platform supports it           |
 | [pantalk-typing-indicator](pantalk-typing-indicator/SKILL.md)     | Show a "bot is typing..." indicator while preparing a reply    |
 | [pantalk-read-notifications](pantalk-read-notifications/SKILL.md) | Poll for mentions, DMs, and notification-worthy events         |
 | [pantalk-read-history](pantalk-read-history/SKILL.md)             | Retrieve conversation history for context and reasoning        |
@@ -41,7 +50,9 @@ Skills are not code - they're structured documentation. Each `SKILL.md` contains
 
 A harness can read these files to populate its tool registry, or an LLM can use them as context to know which commands to run.
 
-See [Pantalk Station](https://github.com/pantalk/station) for a prebuilt environment where these skills are already installed alongside Codex and Claude Code.
+See [Pantalk Ghost](https://github.com/pantalk/ghost) for a prebuilt environment where these skills are already installed alongside Codex and Claude Code.
+For daemon, CLI, and configuration documentation, see the
+[main Pantalk repository](https://github.com/pantalk/pantalk).
 
 ## Releases
 
